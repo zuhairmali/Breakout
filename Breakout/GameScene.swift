@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func kickBall() {
         ball.physicsBody?.isDynamic = true
-        ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 5))
+        ball.physicsBody?.applyImpulse(CGVector(dx: Int.random(in: -5...5), dy: 5))
     }
     
     func updateLabels() {
@@ -198,6 +198,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if contact.bodyA.node == brick ||
                 contact.bodyB.node == brick {
                 score += 1
+                // increase ball velocity by 2%
+                ball.physicsBody!.velocity.dx = ball.physicsBody!.velocity.dx * CGFloat(1.02)
+                ball.physicsBody!.velocity.dy = ball.physicsBody!.velocity.dy * CGFloat(1.02)
                 updateLabels()
                 if brick.color == .blue {
                     brick.color = .orange  // Blue bricks turn to orange
@@ -241,16 +244,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-            if abs(ball.physicsBody!.velocity.dx) < 100 {
-                // ball has stalled in x direction, so kick it randomly horizontally
-                ball.physicsBody?.applyImpulse(CGVector(dx: Int.random(in: -3...3), dy: 0))
-            }
-            if abs(ball.physicsBody!.velocity.dy) < 100 {
-                // ball has stalled in y direct, so kick it randomly vertically
-                ball.physicsBody?.applyImpulse(CGVector(dx: 0, dy: Int.random(in: -3...3)))
-            }
+        if abs(ball.physicsBody!.velocity.dx) < 100 {
+            // ball has stalled in x direction, so kick it randomly horizontally
+            ball.physicsBody?.applyImpulse(CGVector(dx: Int.random(in: -3...3), dy: 0))
         }
-
+        if abs(ball.physicsBody!.velocity.dy) < 100 {
+            // ball has stalled in y direct, so kick it randomly vertically
+            ball.physicsBody?.applyImpulse(CGVector(dx: 0, dy: Int.random(in: -3...3)))
+        }
+    }
+    
 }
 
 
