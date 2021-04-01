@@ -149,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playLabel.text = "Tap to Start"
         playLabel.fontName = "Arial"
         playLabel.position = CGPoint(x: frame.midX, y: frame.midY - 50)
-        playLabel.name = "PlayLabel"
+        playLabel.name = "playLabel"
         addChild(playLabel)
         
         livesLabel.fontSize = 18
@@ -160,9 +160,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontSize = 18
         scoreLabel.fontColor = .black
         scoreLabel.position = CGPoint(x: frame.maxX - 50 , y: frame.minY + 10)
-        addChild(livesLabel)
+        addChild(scoreLabel)
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
